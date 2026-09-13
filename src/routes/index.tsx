@@ -89,7 +89,7 @@ function RouteComponent() {
 
         <div className="mt-16 space-y-5 text-center">
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Ship your next idea, faster
+            Scaffold react app faster, faster
           </h1>
           <p className="mx-auto max-w-md text-balance text-muted-foreground">
             A Vite and React starter wired up with TanStack Router and
