@@ -1,138 +1,178 @@
-
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from '@/components/ui/button';
-import { LuArrowUpRight } from "react-icons/lu";
-import { Separator } from "@/components/ui/separator"
-import { createFileRoute } from '@tanstack/react-router';
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { createFileRoute } from "@tanstack/react-router";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+  LuArrowUpRight,
+  LuTerminal,
+  LuCopy,
+  LuCheck,
+  LuGithub,
+} from "react-icons/lu";
+
+const ICON_SIZE = 64;
+const getIcon: (origin: string, sz?: number) => string = (
+  origin,
+  sz = ICON_SIZE,
+) => `https://www.google.com/s2/favicons?domain=${origin}&sz=${sz}`;
 
 const stack = [
   {
     name: "Vite",
     description: "Fast frontend tooling",
-    icon: "/vite.svg",
     href: "https://vite.dev",
   },
   {
     name: "React",
     description: "Modern UI development",
-    icon: "/react.svg",
     href: "https://react.dev",
+  },
+  {
+    name: "Tailwind CSS",
+    description: "CSS provider for your app",
+    href: "https://tailwindcss.com/",
+  },
+  {
+    name: "Base UI",
+    description: "Engine behind custom component",
+    href: "https://base-ui.com/",
   },
   {
     name: "shadcn/ui",
     description: "Accessible UI components",
-    icon: "/shadcn.png",
     href: "https://ui.shadcn.com",
   },
   {
     name: "TanStack",
     description: "Powerful application primitives",
-    icon: "/tanstack.svg",
     href: "https://tanstack.com",
   },
-]
+];
 
-export const Route = createFileRoute('/')({
+const INSTALL_COMMAND = "pnpm dlx degit SoumabhaSaha15/VRST app";
+
+export const Route = createFileRoute("/")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(INSTALL_COMMAND);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // clipboard unavailable, ignore
+    }
+  };
+
   return (
-    <div className="flex min-h-svh items-center justify-center p-6">
-      <Card className="w-full max-w-5xl shadow-none">
-        <CardHeader className="space-y-8">
-          <div className="flex items-center justify-between">
-            <Badge variant="outline">VRST</Badge>
+    <div className="relative flex min-h-svh flex-col items-center overflow-hidden bg-background px-6 py-20">
+      {/* single ambient glow, the one deliberate motion moment on the page */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-56 -z-10 h-105 w-105 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[110px] motion-safe:animate-pulse motion-reduce:animate-none animation-duration-[4s]"
+      />
 
-            <Badge variant="secondary">
-              React Template
-            </Badge>
+      <div className="w-full max-w-2xl">
+        <div className="flex items-center justify-between">
+          <Badge variant="outline" className="font-mono">
+            VRST
+          </Badge>
+          <Badge variant="secondary" className="font-mono">
+            v1.0.0
+          </Badge>
+        </div>
+
+        <div className="mt-16 space-y-5 text-center">
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Ship your next idea, faster
+          </h1>
+          <p className="mx-auto max-w-md text-balance text-muted-foreground">
+            A Vite and React starter wired up with TanStack Router and
+            shadcn/ui, so you can skip the setup and start building.
+          </p>
+        </div>
+
+        {/* the install command is the actual first action, not a generic CTA */}
+        <div className="mx-auto mt-10 flex max-w-md items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3">
+          <div className="flex items-center gap-2.5 overflow-x-auto">
+            <LuTerminal className="size-4 shrink-0 text-muted-foreground" />
+            <code className="whitespace-nowrap font-mono text-sm text-foreground">
+              {INSTALL_COMMAND}
+            </code>
           </div>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="size-7 shrink-0"
+            onClick={handleCopy}
+            aria-label="Copy install command"
+          >
+            {copied ? (
+              <LuCheck className="size-4 text-primary" />
+            ) : (
+              <LuCopy className="size-4" />
+            )}
+          </Button>
+        </div>
 
-          <Separator />
+        <div className="mt-6 flex justify-center gap-3">
+          <Button variant="outline"
+            onClick={() => {
+              window.open("https://github.com/SoumabhaSaha15/VRST/blob/main/README.md", "_blank")
+            }}
+          >
+            Documentation
+            <LuArrowUpRight />
+          </Button>
+          <Button variant="ghost"
+            onClick={() => {
+              window.open("https://github.com/SoumabhaSaha15/VRST", "_blank")
+            }}
+          >
+            <LuGithub />
+            View source
+          </Button>
+        </div>
+      </div>
 
-          <div className="space-y-4 py-8 text-center">
-            <Badge variant="outline">
-              Vite + React + shadcn + TanStack
-            </Badge>
+      <Separator className="my-16 max-w-2xl" />
 
-            <CardTitle className="text-4xl tracking-tight sm:text-5xl">
-              Welcome to VRST
-            </CardTitle>
+      <div className="w-full max-w-2xl">
+        <p className="mb-6 text-center text-sm text-muted-foreground">
+          Built with a stack you already know.
+        </p>
 
-            <p className="mx-auto max-w-xl text-muted-foreground">
-              A modern React starter template with a carefully selected
-              development stack, ready for your next project.
-            </p>
-
-            <div className="flex justify-center gap-3 pt-2">
-              <Button>
-                Get started
-              </Button>
-
-              <Button variant="outline">
-                Documentation
-                <LuArrowUpRight />
-              </Button>
-            </div>
-          </div>
-        </CardHeader>
-
-        <CardContent className="space-y-6">
-          <Separator />
-
-          <div className="space-y-1">
-            <h2 className="text-sm font-medium">
-              Technology stack
-            </h2>
-
-            <p className="text-sm text-muted-foreground">
-              Everything included in the template.
-            </p>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {stack.map((item) => (
-              <Card
-                key={item.name}
-                className="group transition-colors hover:bg-muted/50"
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex size-10 items-center justify-center rounded-md border bg-background p-2">
-                      <img
-                        src={item.icon}
-                        alt=""
-                        className="size-full object-contain"
-                      />
-                    </div>
-
-                    <LuArrowUpRight
-                      className="size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
-                    />
-                  </div>
-
-                  <CardTitle className="text-base">
-                    {item.name}
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+        <div className="grid grid-cols-2 divide-x divide-y divide-border rounded-lg border sm:grid-cols-3 sm:divide-y-0">
+          {stack.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex flex-col items-center gap-2 px-4 py-6 text-center transition-colors hover:bg-muted/50"
+            >
+              <div className="flex size-9 items-center justify-center">
+                <img
+                  src={getIcon(item.href)}
+                  alt={item.description}
+                  className="size-full object-contain grayscale transition-[filter] duration-200 group-hover:grayscale-0 rounded-md"
+                />
+              </div>
+              <span className="text-sm font-medium text-foreground">
+                {item.name}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {item.description}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
-  )
+  );
 }

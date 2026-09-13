@@ -3,6 +3,7 @@ import { StrictMode } from 'react'
 import { routeTree } from "@/routeTree.gen";
 import { createRoot } from 'react-dom/client';
 import { QueryClient } from "@tanstack/react-query";
+import { ThemeProvider } from "@/components/theme-provider";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
@@ -33,18 +34,16 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
-function App() {
-  // const auth = useSelector(authStore, (state) => state);
-  // const { theme } = useSelector(themeStore, (state) => state);
-  return <RouterProvider router={router} />;
-}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <PersistQueryClientProvider
       client={queryClient}
       persistOptions={{ persister }}
     >
-      <App />
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={router} />;
+      </ThemeProvider>
     </PersistQueryClientProvider>
   </StrictMode>,
 )
