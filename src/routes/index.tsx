@@ -22,31 +22,37 @@ const stack = [
     name: "Vite",
     description: "Fast frontend tooling",
     href: "https://vite.dev",
+    icon: "vite.svg"
   },
   {
     name: "React",
     description: "Modern UI development",
     href: "https://react.dev",
+    icon: "react.svg"
   },
   {
     name: "Tailwind CSS",
     description: "CSS provider for your app",
     href: "https://tailwindcss.com/",
+    icon: "tailwind-css.svg"
   },
   {
     name: "Base UI",
     description: "Engine behind custom component",
     href: "https://base-ui.com/",
+    icon: "base-ui.svg"
   },
   {
     name: "shadcn/ui",
     description: "Accessible UI components",
     href: "https://ui.shadcn.com",
+    icon: "shadcn.svg"
   },
   {
     name: "TanStack",
     description: "Powerful application primitives",
     href: "https://tanstack.com",
+    icon: "tanstack.svg"
   },
 ];
 
@@ -123,7 +129,7 @@ function RouteComponent() {
         <div className="mt-6 flex justify-center gap-3">
           <Button variant="outline"
             onClick={() => {
-              window.open("https://github.com/SoumabhaSaha15/VRST/blob/main/README.md", "_blank")
+              window.open("https://github.com/SoumabhaSaha15/VRST/blob/main/DOCS.md", "_blank")
             }}
           >
             Documentation
@@ -158,7 +164,7 @@ function RouteComponent() {
             >
               <div className="flex size-9 items-center justify-center">
                 <img
-                  src={getIcon(item.href)}
+                  src={item.icon}
                   alt={item.description}
                   className="size-full object-contain grayscale transition-[filter] duration-200 group-hover:grayscale-0 rounded-md"
                 />

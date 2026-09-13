@@ -1,8 +1,17 @@
-# VRST  Vite + React + Shad-CN + Tanstack
+# VRST Starter Template
 
-> Modern typescript nad react template to scaffold app faster
+A modern, production-ready frontend starter template powered by **Vite**, **React**, **Shadcn-Base-UI-Tailwind/**, and **TanStack**. Designed for rapid development with strict type safety, modular architecture, and modern developer tooling out of the box.
 
-A Vite and React starter wired up with TanStack Router and shadcn/ui, so you can skip the setup and start building.
+---
+
+## ✨ Features
+
+- ⚡ **Instant Server Start:** Powered by Vite's native ES module dev server.
+- 🔒 **Full Type Safety:** Strict TypeScript configuration for scalable codebases.
+- 🎨 **Utility-First Styling:** Pre-configured Tailwind CSS setup.
+- 🗂️ **Clean Architecture:** Sensible folder structure for components, hooks, routes, and assets.
+- 🛠️ **Developer Experience:** Configured path aliases, ESLint, and Prettier integration.
+
 ---
 <div align="center">
   <table>
