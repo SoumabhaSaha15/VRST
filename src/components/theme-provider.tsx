@@ -20,6 +20,10 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
+function isTheme(value: string | null): value is Theme {
+  return value === "dark" || value === "light" || value === "system"
+}
+
 export function ThemeProvider({
   children,
   defaultTheme = "system",
@@ -27,25 +31,33 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => {
+      const storedTheme = localStorage.getItem(storageKey)
+      return isTheme(storedTheme) ? storedTheme : defaultTheme
+    }
   )
 
   useEffect(() => {
     const root = window.document.documentElement
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
-    root.classList.remove("light", "dark")
+    const applyTheme = () => {
+      root.classList.remove("light", "dark")
 
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
-      root.classList.add(systemTheme)
-      return
+      if (theme === "system") {
+        root.classList.add(mediaQuery.matches ? "dark" : "light")
+      } else {
+        root.classList.add(theme)
+      }
     }
 
-    root.classList.add(theme)
+    applyTheme()
+
+    if (theme === "system") {
+      mediaQuery.addEventListener("change", applyTheme)
+    }
+
+    return () => mediaQuery.removeEventListener("change", applyTheme)
   }, [theme])
 
   const value = {

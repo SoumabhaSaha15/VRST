@@ -11,12 +11,6 @@ import {
   LuGithub,
 } from "react-icons/lu";
 
-// const ICON_SIZE = 64;
-// const getIcon: (origin: string, sz?: number) => string = (
-//   origin,
-//   sz = ICON_SIZE,
-// ) => `https://www.google.com/s2/favicons?domain=${origin}&sz=${sz}`;
-
 const stack = [
   {
     name: "Vite",
@@ -76,13 +70,11 @@ function RouteComponent() {
   };
 
   return (
-    <div className="relative flex min-h-svh flex-col items-center overflow-hidden bg-background px-6 py-20">
-      {/* single ambient glow, the one deliberate motion moment on the page */}
+    <div className="relative flex min-h-svh flex-col items-center overflow-hidden bg-background px-6 py-10">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-56 -z-10 h-105 w-105 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[110px] motion-safe:animate-pulse motion-reduce:animate-none animation-duration-[4s]"
       />
-
       <div className="w-full max-w-2xl">
         <div className="flex items-center justify-between">
           <Badge variant="outline" className="font-mono">
@@ -92,7 +84,6 @@ function RouteComponent() {
             v1.0.0
           </Badge>
         </div>
-
         <div className="mt-16 space-y-5 text-center">
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Scaffold react app faster, faster
@@ -102,7 +93,6 @@ function RouteComponent() {
             shadcn/ui, so you can skip the setup and start building.
           </p>
         </div>
-
         {/* the install command is the actual first action, not a generic CTA */}
         <div className="mx-auto mt-10 flex max-w-md items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3">
           <div className="flex items-center gap-2.5 overflow-x-auto">

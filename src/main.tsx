@@ -41,7 +41,7 @@ createRoot(document.getElementById('root')!).render(
       client={queryClient}
       persistOptions={{ persister }}
     >
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <ThemeProvider>
         <RouterProvider router={router} />
       </ThemeProvider>
     </PersistQueryClientProvider>
