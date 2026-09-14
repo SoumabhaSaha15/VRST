@@ -11,11 +11,11 @@ import {
   LuGithub,
 } from "react-icons/lu";
 
-const ICON_SIZE = 64;
-const getIcon: (origin: string, sz?: number) => string = (
-  origin,
-  sz = ICON_SIZE,
-) => `https://www.google.com/s2/favicons?domain=${origin}&sz=${sz}`;
+// const ICON_SIZE = 64;
+// const getIcon: (origin: string, sz?: number) => string = (
+//   origin,
+//   sz = ICON_SIZE,
+// ) => `https://www.google.com/s2/favicons?domain=${origin}&sz=${sz}`;
 
 const stack = [
   {

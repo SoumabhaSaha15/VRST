@@ -1,7 +1,7 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 const RootLayout = () => (
   <>
     <Outlet />
@@ -14,8 +14,7 @@ const RootLayout = () => (
         {
           name: "Router",
           render: <TanStackRouterDevtoolsPanel />,
-        },
-
+        }
       ]}
     />
   </>
